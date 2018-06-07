@@ -3,12 +3,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_sequence_animation/animation_sequence.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import 'package:flutter/scheduler.dart';
+
+/// A [TickerProvider] that creates a standalone ticker.
+///
+/// Useful in tests that create an [AnimationController] outside of the widget
+/// tree.
+class TestVSync implements TickerProvider {
+  /// Creates a ticker provider that creates standalone tickers.
+  const TestVSync();
+
+  @override
+  Ticker createTicker(TickerCallback onTick) => new Ticker(onTick);
+}
 
 void main() {
   testWidgets('Sequence animation smoke test', (WidgetTester tester) async {
     
     
-    AnimationController controller = new AnimationController(vsync: tester);
+    AnimationController controller = new AnimationController(vsync: const TestVSync());
 
     expect(controller.duration, isNull);
 
@@ -42,14 +55,9 @@ void main() {
     expect(decoration.color, Colors.red);
 
 
-    controller.forward(from: 0.5);
-    await tester.pump(const Duration(seconds: 1));
-    await tester.pump();
-    await tester.pump();
-    await tester.pump();
-    await tester.pump();
-    await tester.pump();
-    await tester.pump();
+    controller.forward();
+    await tester.pumpAndSettle();
+
 
     decoration = tester.widget<Container>(find.byKey(key)).decoration;
     expect(decoration.color, Colors.yellow);
@@ -60,7 +68,6 @@ void main() {
 
 Widget buildAnimatableContainer({Animation animation, Key key, SequenceAnimation seq, Object seqKey}) {
   return new AnimatedBuilder(animation: animation, builder: (context, child) {
-    print(seq[seqKey].value);
     return new Container(
       key: key,
       width: 200.0,
