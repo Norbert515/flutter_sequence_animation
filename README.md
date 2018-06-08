@@ -16,7 +16,7 @@ _The Staggered Animation example from [here](https://flutter.io/animations/stagg
 The same animation with this package is 128 lines of [code](https://github.com/Norbert515/flutter_sequence_animation/blob/master/examples/lib/staggered_animation_replication.dart).
 It is also much easier to read and edit._
 
-You specify an animation like this:
+#### You specify an animation like this:
 ``` dart
     sequenceAnimation = new SequenceAnimationBuilder()
       .addAnimatable(
@@ -39,13 +39,13 @@ You specify an animation like this:
           curve: Curves.fastOutSlowIn
         ).animate(controller);
 ```
-Now you can access the resulting animation from anywhere in your code with
+#### Now you can access the resulting animation from anywhere in your code with
 ```dart
 sequenceAnimation["color"]
 ```
 This animation is a composition of all animatables you passed in with the same tag.
 
-Example usage of this example:
+#### Example usage of this example:
 ```dart
 new AnimatedBuilder(
           builder: (context, child) {
