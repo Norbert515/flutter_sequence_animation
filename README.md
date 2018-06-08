@@ -39,6 +39,9 @@ It is also much easier to read and edit._
           curve: Curves.fastOutSlowIn
         ).animate(controller);
 ```
+In this case only the color is animated but you can add as many different properties to the sequence as you'd like.
+The only restriction is that Animations with the same tag can not overlap and need to be ordered.
+
 #### Now you can access the resulting animation from anywhere in your code with
 ```dart
 sequenceAnimation["color"]

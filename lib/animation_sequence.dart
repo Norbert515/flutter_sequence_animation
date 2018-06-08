@@ -41,7 +41,7 @@ class SequenceAnimationBuilder {
         Curve curve = Curves.linear,
         @required Object tag}) {
     assert(to >= from);
-    _animations.add(new _AnimationInformation(animatable: anim,from: from, to: to, curve: curve, tag: tag));
+    _animations.add(new _AnimationInformation(animatable: anim, from: from, to: to, curve: curve, tag: tag));
     return this;
   }
 
