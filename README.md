@@ -6,7 +6,7 @@
 
 # Demo
 
-![alt-text-1](image1.png "title-1") ![alt-text-2](image2.png "title-2")
+![alt-text-1](assets/colors.gif "title-1") ![alt-text-1](assets/size.gif "title-1")![alt-text-1](assets/staggered.gif "title-1")
 
 #Code
 
