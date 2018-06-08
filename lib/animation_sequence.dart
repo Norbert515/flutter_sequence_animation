@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 
 class _AnimationInformation {
- // final _AnimInfo animInfo;
   final Animatable animatable;
   final Duration from;
   final Duration to;
@@ -16,10 +15,12 @@ class SequenceAnimationBuilder {
 
   List<_AnimationInformation> _animations = [];
 
-  /// Adds an [Animatable] to the sequence, in the most cases this would be a [Tween]
-  /// The from and to [Duration] specify points in time the animation takes place.
-  /// You can also specify a [Curve] the animation should interpolate along.
+  /// Adds an [Animatable] to the sequence, in the most cases this would be a [Tween].
+  /// The from and to [Duration] specify points in time where the animation takes place.
+  /// You can also specify a [Curve] for the [Animatable].
   ///
+  /// [Animatable]s which animate on the same tag are not allowed to overlap and they also need to be add in the same order they are played.
+  /// These restrictions only apply to [Animatable]s operating on the same tag.
   ///
   ///
   /// ## Sample code
@@ -54,8 +55,7 @@ class SequenceAnimationBuilder {
         longestTimeMicro = micro;
       }
     });
-
-    // Sets the duration
+    // Sets the duration of the controller
     controller.duration = new Duration(microseconds: longestTimeMicro);
 
     var anims = <Object, Animatable>{};
@@ -105,15 +105,14 @@ class SequenceAnimation {
   /// Use the [SequenceAnimationBuilder] to construct this class.
   SequenceAnimation._internal(this._animations);
 
-  /// Returns the animation with a given tag, this animation is tied to the controller,
-  /// meaning if you forward the controller all these animations will run.
+  /// Returns the animation with a given tag, this animation is tied to the controller.
   Animation operator [](Object key) {
     assert(_animations.containsKey(key), "There was no animatable with the key: $key");
     return _animations[key];
   }
 
 }
-/// Evaluates [anim] if the animation is in the time-frame of [begin] and [end],
+/// Evaluates [anim] if the animation is in the time-frame of [begin] (inclusive) and [end] (inclusive),
 /// if not it evaluates the [defaultAnim]
 class IntervalAnimatable<T> extends Animatable<T> {
 
@@ -139,8 +138,8 @@ class IntervalAnimatable<T> extends Animatable<T> {
   }
 
 
-  /// Chains an animatable with a CurveTween and the given interval.
-  /// Basically, the animation gets contrained to the given interval
+  /// Chains an [Animatable] with a [CurveTween] and the given [Interval].
+  /// Basically, the animation is being constrained to the given interval
   static Animatable chainCurve(Animatable parent, Interval interval) {
     return parent.chain(new CurveTween(curve: interval));
   }
