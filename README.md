@@ -9,7 +9,7 @@
 
 ![alt-text-1](assets/colors.gif "title-1") ![alt-text-1](assets/size.gif "title-1")![alt-text-1](assets/staggered.gif "title-1")
 
-#Code
+# Code
 
 The Staggered Animation example from [here](https://flutter.io/animations/staggered-animations/) is
 207 lines of [code](https://raw.githubusercontent.com/flutter/website/master/_includes/code/animation/basic_staggered_animation/main.dart) .
