@@ -16,7 +16,7 @@ _The Staggered Animation example from [here](https://flutter.io/animations/stagg
 The same animation with this package is 128 lines of [code](https://github.com/Norbert515/flutter_sequence_animation/blob/master/examples/lib/staggered_animation_replication.dart).
 It is also much easier to read and edit._
 
-#### You specify an animation like this:
+#### You specify a sequence of animatables like this:
 ``` dart
     sequenceAnimation = new SequenceAnimationBuilder()
       .addAnimatable(

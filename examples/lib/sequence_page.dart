@@ -65,7 +65,7 @@ class _SequencePageState extends State<SequencePage> with SingleTickerProviderSt
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text("Sequene"),
+        title: new Text("Sequence"),
       ),
       body: new GestureDetector(
         behavior: HitTestBehavior.opaque,
