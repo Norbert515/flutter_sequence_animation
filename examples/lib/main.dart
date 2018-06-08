@@ -1,3 +1,4 @@
+import 'package:examples/same_variable_multiple_animations.dart';
 import 'package:examples/sequence_page.dart';
 import 'package:examples/staggered_animation_replication.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +17,7 @@ class MyApp extends StatelessWidget {
       routes: {
         'sequence': (_)=> new SequencePage(),
         'StaggeredAnimationReplication': (_)=> new StaggeredAnimationReplication(),
+        'SameVariableAnimationPage': (_)=> new SameVariableAnimationPage(),
       },
     );
   }
@@ -39,6 +41,7 @@ class _HomePageState extends State<HomePage> {
           children: <Widget>[
             new RaisedButton(onPressed: (){Navigator.pushNamed(context, 'sequence');}, child: new Text("Sequence"),),
             new RaisedButton(onPressed: (){Navigator.pushNamed(context, 'StaggeredAnimationReplication');}, child: new Text("StaggeredAnimationReplication"),),
+            new RaisedButton(onPressed: (){Navigator.pushNamed(context, 'SameVariableAnimationPage');}, child: new Text("SameVariableAnimationPage"),),
           ],
         ),
       )
