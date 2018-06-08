@@ -1,8 +1,9 @@
 # flutter_sequence_animation
 
-##### Composite Animations with ease!
-##### Specify animations outwards instead in inwards (no more calcuations how much 38.5% of 3.5 seconds are)
-##### Animate the same variable with multiple animatables!
+## Main features:
+### - Specify animations outwards instead in inwards (no more calculations of how much 38.5% of 3.5 seconds is)
+### - Animate the same variable with multiple animatables!
+### - Intuitive and easy to use interface
 
 # Demo
 
@@ -44,7 +45,7 @@ sequenceAnimation["color"]
 ```
 This animation is a composition of all animatables you passed in with the same tag.
 
-Example usage of the accessor:
+Example usage of this example:
 ```dart
 new AnimatedBuilder(
           builder: (context, child) {
