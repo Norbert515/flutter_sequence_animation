@@ -16,6 +16,23 @@ class SequenceAnimationBuilder {
 
   List<_AnimationInformation> _animations = [];
 
+  /// Adds an [Animatable] to the sequence, in the most cases this would be a [Tween]
+  /// The from and to [Duration] specify points in time the animation takes place.
+  /// You can also specify a [Curve] the animation should interpolate along.
+  ///
+  ///
+  ///
+  /// ## Sample code
+  ///
+  /// ```dart
+  ///     var sequenceAnimation = new SequenceAnimationBuilder()
+  ///      .addAnimatable(
+  ///        anim: new ColorTween(begin: Colors.red, end: Colors.yellow),
+  ///        from:  const Duration(seconds: 0),
+  ///        to: const Duration(seconds: 2),
+  ///        tag: "color").animate(controller);
+  /// ```
+  ///
   SequenceAnimationBuilder addAnimatable(
       {@required Animatable anim,
         @required Duration from,
@@ -28,8 +45,7 @@ class SequenceAnimationBuilder {
   }
 
 
-  /// The controller duration is going to be overwritten by this class, you don't need to specify it on your own
-
+  /// The controllers duration is going to be overwritten by this class, you should not specify it on your own
   SequenceAnimation animate(AnimationController controller) {
     int longestTimeMicro = 0;
     _animations.forEach((info) {
@@ -38,14 +54,13 @@ class SequenceAnimationBuilder {
         longestTimeMicro = micro;
       }
     });
-    //TODO assertions
 
     // Sets the duration
     controller.duration = new Duration(microseconds: longestTimeMicro);
 
-    var anims = <String, Animatable>{};
-    var begins = <String, double>{};
-    var ends = <String, double>{};
+    var anims = <Object, Animatable>{};
+    var begins = <Object, double>{};
+    var ends = <Object, double>{};
 
     _animations.forEach((info) {
       assert(info.to.inMicroseconds <= longestTimeMicro);
@@ -72,13 +87,13 @@ class SequenceAnimationBuilder {
       }
     });
 
-    var result = <String, Animation>{};
+    var result = <Object, Animation>{};
 
     anims.forEach((tag, animInfo) {
       result[tag] = animInfo.animate(controller);
     });
 
-    return new SequenceAnimation(result);
+    return new SequenceAnimation._internal(result);
   }
 
 }
@@ -87,7 +102,7 @@ class SequenceAnimation {
 
   final Map<Object, Animation> _animations;
 
-  SequenceAnimation(this._animations);
+  SequenceAnimation._internal(this._animations);
 
   Animation operator [](Object key) {
     assert(_animations.containsKey(key), "There was no animatable with the key: $key");
@@ -118,6 +133,8 @@ class IntervalAnimatable<T> extends Animatable<T> {
   }
 
 
+  /// Chains an animatable with a CurveTween and the given interval.
+  /// Basically, the animation gets contrained to the given interval
   static Animatable chainCurve(Animatable parent, Interval interval) {
     return parent.chain(new CurveTween(curve: interval));
   }

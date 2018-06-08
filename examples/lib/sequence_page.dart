@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_sequence_animation/animation_sequence.dart';
 
@@ -32,7 +34,7 @@ class _SequencePageState extends State<SequencePage> with SingleTickerProviderSt
         from:  const Duration(seconds: 2),
         to: const Duration(seconds: 4),
         tag: "color",
-        curve: Curves.elasticIn)
+        curve: Curves.easeOut)
         .addAnimatable(
         anim: new ColorTween(begin: Colors.blueAccent, end: Colors.pink),
         //  anim: new Tween<double>(begin: 200.0, end: 40.0),
@@ -45,6 +47,20 @@ class _SequencePageState extends State<SequencePage> with SingleTickerProviderSt
   }
 
 
+  Future<Null> _playAnimation() async {
+    try {
+      await controller.forward().orCancel;
+      await controller.reverse().orCancel;
+    } on TickerCanceled {
+      // the animation got canceled, probably because we were disposed
+    }
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,33 +68,24 @@ class _SequencePageState extends State<SequencePage> with SingleTickerProviderSt
       appBar: new AppBar(
         title: new Text("Sequene"),
       ),
-      body: new AnimatedBuilder(
-        builder: (context, child) {
-          return new Center(
-            child: new Container(
-              color: sequenceAnimation["color"].value,
-              height: 200.0,
-              width: 200.0,
-            ),
-          );
+      body: new GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: () {
+          _playAnimation();
         },
-        animation: controller,
+        child: new AnimatedBuilder(
+          builder: (context, child) {
+            return new Center(
+              child: new Container(
+                color: sequenceAnimation["color"].value,
+                height: 200.0,
+                width: 200.0,
+              ),
+            );
+          },
+          animation: controller,
+        ),
       ),
-      floatingActionButton: new FloatingActionButton(onPressed: (){
-        if(forward) {
-          controller.forward().then((_) {
-            setState(() {
-              forward = false;
-            });
-          });
-        } else if(!forward){
-          controller.reverse().then((_) {
-            setState(() {
-              forward = true;
-            });
-          });
-        }
-      }, child: new Icon(forward == null? Icons.not_interested: forward? Icons.arrow_forward: Icons.arrow_back),),
     );
   }
 

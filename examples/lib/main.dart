@@ -1,4 +1,5 @@
 import 'package:examples/sequence_page.dart';
+import 'package:examples/staggered_animation_replication.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(new MyApp());
@@ -11,8 +12,36 @@ class MyApp extends StatelessWidget {
       theme: new ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: new SequencePage(),
+      home: new HomePage(),
+      routes: {
+        'sequence': (_)=> new SequencePage(),
+        'StaggeredAnimationReplication': (_)=> new StaggeredAnimationReplication(),
+      },
     );
   }
 }
 
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => new _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
+  Widget build(BuildContext context) {
+    return new Scaffold(
+      appBar: new AppBar(
+        title: new Text("Examples"),
+      ),
+      body: new Center(
+        child: new Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            new RaisedButton(onPressed: (){Navigator.pushNamed(context, 'sequence');}, child: new Text("Sequence"),),
+            new RaisedButton(onPressed: (){Navigator.pushNamed(context, 'StaggeredAnimationReplication');}, child: new Text("StaggeredAnimationReplication"),),
+          ],
+        ),
+      )
+    );
+  }
+}
