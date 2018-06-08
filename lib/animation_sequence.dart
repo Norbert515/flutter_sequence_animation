@@ -77,8 +77,8 @@ class SequenceAnimationBuilder {
             "a) Have them not overlap \n"
             "b) Add them in an ordered fashion");
         anims[info.tag] = new IntervalAnimatable(
-            first: anims[info.tag],
-            second: IntervalAnimatable.chainCurve(info.animatable, intervalCurve),
+            anim: anims[info.tag],
+            defaultAnim: IntervalAnimatable.chainCurve(info.animatable, intervalCurve),
           begin: begins[info.tag],
           end: ends[info.tag],
         );
@@ -102,33 +102,39 @@ class SequenceAnimation {
 
   final Map<Object, Animation> _animations;
 
+  /// Use the [SequenceAnimationBuilder] to construct this class.
   SequenceAnimation._internal(this._animations);
 
+  /// Returns the animation with a given tag, this animation is tied to the controller,
+  /// meaning if you forward the controller all these animations will run.
   Animation operator [](Object key) {
     assert(_animations.containsKey(key), "There was no animatable with the key: $key");
     return _animations[key];
   }
 
 }
-
+/// Evaluates [anim] if the animation is in the time-frame of [begin] and [end],
+/// if not it evaluates the [defaultAnim]
 class IntervalAnimatable<T> extends Animatable<T> {
 
-  final Animatable first;
-  final Animatable second;
-  /// The relative begin to of the first animation
-  /// If your animationcontroller is running from 0->1
+  final Animatable anim;
+  final Animatable defaultAnim;
+  /// The relative begin to of [anim]
+  /// If your [AnimationController] is running from 0->1, this needs to be a value between those two
   final double begin;
+  /// The relative end to of [anim]
+  /// If your [AnimationController] is running from 0->1, this needs to be a value between those two
   final double end;
 
-  IntervalAnimatable({@required this.first, @required this.second, @required this.begin, @required this.end});
+  IntervalAnimatable({@required this.anim, @required this.defaultAnim, @required this.begin, @required this.end});
 
   @override
   T evaluate(Animation<double> animation) {
     double t = animation.value;
     if(t >= begin && t <= end) {
-      return first.evaluate(animation);
+      return anim.evaluate(animation);
     } else {
-      return second.evaluate(animation);
+      return defaultAnim.evaluate(animation);
     }
   }
 

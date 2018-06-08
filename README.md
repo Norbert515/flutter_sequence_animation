@@ -1,6 +1,64 @@
 # flutter_sequence_animation
 
-A new Flutter project.
+##### Composite Animations with ease!
+##### Specify animations outwards instead in inwards (no more calcuations how much 38.5% of 3.5 seconds are)
+##### Animate the same variable with multiple animatables!
+
+# Demo
+
+![alt-text-1](image1.png "title-1") ![alt-text-2](image2.png "title-2")
+
+#Code
+
+The Staggered Animation example from [here](https://flutter.io/animations/staggered-animations/) is
+207 lines of [code](https://raw.githubusercontent.com/flutter/website/master/_includes/code/animation/basic_staggered_animation/main.dart) .
+The same animation with this package is 128 lines of [code](https://github.com/Norbert515/flutter_sequence_animation/blob/master/examples/lib/staggered_animation_replication.dart).
+It is also much easier to read and edit.
+
+You specify an animation like this:
+``` dart
+    sequenceAnimation = new SequenceAnimationBuilder()
+      .addAnimatable(
+          anim: new ColorTween(begin: Colors.red, end: Colors.yellow),
+          from:  const Duration(seconds: 0),
+          to: const Duration(seconds: 2),
+          tag: "color"
+        ).addAnimatable(
+          anim: new ColorTween(begin: Colors.yellow, end: Colors.blueAccent),
+          from:  const Duration(seconds: 2),
+          to: const Duration(seconds: 4),
+          tag: "color",
+          curve: Curves.easeOut
+        ).addAnimatable(
+          anim: new ColorTween(begin: Colors.blueAccent, end: Colors.pink),
+          //  anim: new Tween<double>(begin: 200.0, end: 40.0),
+          from:  const Duration(seconds: 5),
+          to: const Duration(seconds: 6),
+          tag: "color",
+          curve: Curves.fastOutSlowIn
+        ).animate(controller);
+```
+Now you can access the resulting animation from anywhere in your code with
+```dart
+sequenceAnimation["color"]
+```
+This animation is a composition of all animatables you passed in with the same tag.
+
+Example usage of the accessor:
+```dart
+new AnimatedBuilder(
+          builder: (context, child) {
+            return new Center(
+              child: new Container(
+                color: sequenceAnimation["color"].value,
+                height: 200.0,
+                width: 200.0,
+              ),
+            );
+          },
+          animation: controller,
+        ),
+```
 
 ## Getting Started
 

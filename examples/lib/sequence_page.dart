@@ -19,7 +19,7 @@ class _SequencePageState extends State<SequencePage> with SingleTickerProviderSt
   @override
   void initState() {
     super.initState();
-    controller = new AnimationController(vsync: this, duration: const Duration(seconds: 5));
+    controller = new AnimationController(vsync: this);
 
     sequenceAnimation = new SequenceAnimationBuilder()
       .addAnimatable(
