@@ -1,6 +1,6 @@
 # flutter_sequence_animation
 
-### - Specify animations in a sequence outwards instead in inwards (no more calculations of how much 38.5% of 3.5 seconds is)
+### - No need to use intervals and calculate percentages for your total animation time. 
 ### - Animate the same variable with multiple animatables!
 ### - You only need one AnimationController
 ### - Intuitive and easy to use interface
@@ -60,6 +60,8 @@ new AnimatedBuilder(
           animation: controller,
         ),
 ```
+
+#### The animation duration is set automatically (don't change the duration of the controller yourself).
 
 ## Getting Started
 
