@@ -1,7 +1,8 @@
 # flutter_sequence_animation
 
-### - Specify animations outwards instead in inwards (no more calculations of how much 38.5% of 3.5 seconds is)
+### - Specify animations in a sequence outwards instead in inwards (no more calculations of how much 38.5% of 3.5 seconds is)
 ### - Animate the same variable with multiple animatables!
+### - You only need one AnimationController
 ### - Intuitive and easy to use interface
 
 # Demo
