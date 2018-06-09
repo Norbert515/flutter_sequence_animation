@@ -5,6 +5,20 @@
 ### - You only need one AnimationController
 ### - Intuitive and easy to use interface
 
+# Installation
+```
+dependencies:
+  flutter_sequence_animation: "^1.0.1"
+```
+then
+```
+$ flutter packages get
+```
+then
+```
+import 'package:flutter_sequence_animation/flutter_sequence_animation.dart';
+```
+
 # Demo
 
 ![alt-text-1](assets/colors.gif "title-1") ![alt-text-1](assets/size.gif "title-1")![alt-text-1](assets/staggered.gif "title-1")
