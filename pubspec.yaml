@@ -1,7 +1,7 @@
 name: flutter_sequence_animation
-description: A new Flutter project.
-version: 1.0.0
-author: kozsir.norbert@gmail.com
+description: Composite together any animation with this robust and simple to use package.
+version: 1.0.1
+author: Norbert Kozsir <kozsir.norbert@gmail.com>
 homepage: https://github.com/Norbert515/flutter_sequence_animation
 
 
@@ -12,6 +12,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+
+  meta: ^1.1.2
 
 dev_dependencies:
   flutter_test:
