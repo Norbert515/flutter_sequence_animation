@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:flutter_sequence_animation/animation_sequence.dart';
+import 'package:flutter_sequence_animation/flutter_animation_sequence.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:flutter/scheduler.dart';

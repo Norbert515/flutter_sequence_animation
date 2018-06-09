@@ -1,7 +1,8 @@
-import 'package:examples/same_variable_multiple_animations.dart';
-import 'package:examples/sequence_page.dart';
-import 'package:examples/staggered_animation_replication.dart';
 import 'package:flutter/material.dart';
+
+import 'same_variable_multiple_animations.dart';
+import 'sequence_page.dart';
+import 'staggered_animation_replication.dart';
 
 void main() => runApp(new MyApp());
 
