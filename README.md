@@ -80,6 +80,9 @@ new AnimatedBuilder(
 
 #### The animation duration is set automatically (don't change the duration of the controller yourself).
 
+### Sepcial thanks to Simon Slightfoot for the help!
+
+
 ## Getting Started
 
 For help getting started with Flutter, view our online [documentation](https://flutter.io/).
