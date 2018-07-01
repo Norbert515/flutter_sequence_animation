@@ -10,11 +10,7 @@
 dependencies:
   flutter_sequence_animation: "^2.0.0"
 ```
-until pub didn't update: 
-```
-dependencies:
-  flutter_sequence_animation: "^1.0.1"
-```
+
 then
 ```
 $ flutter packages get
