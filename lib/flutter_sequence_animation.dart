@@ -39,12 +39,13 @@ class SequenceAnimationBuilder {
   ///        tag: "color").animate(controller);
   /// ```
   ///
-  SequenceAnimationBuilder addAnimatable(
-      {@required Animatable animatable,
-      @required Duration from,
-      @required Duration to,
-      Curve curve = Curves.linear,
-      @required Object tag}) {
+  SequenceAnimationBuilder addAnimatable({
+    @required Animatable animatable,
+    @required Duration from,
+    @required Duration to,
+    Curve curve: Curves.linear,
+    @required Object tag,
+  }) {
     assert(to >= from);
     _animations.add(new _AnimationInformation(
         animatable: animatable, from: from, to: to, curve: curve, tag: tag));
@@ -122,6 +123,13 @@ class SequenceAnimation {
 /// Evaluates [animatable] if the animation is in the time-frame of [begin] (inclusive) and [end] (inclusive),
 /// if not it evaluates the [defaultAnimatable]
 class IntervalAnimatable<T> extends Animatable<T> {
+  IntervalAnimatable({
+    @required this.animatable,
+    @required this.defaultAnimatable,
+    @required this.begin,
+    @required this.end,
+  });
+
   final Animatable animatable;
   final Animatable defaultAnimatable;
 
@@ -132,12 +140,6 @@ class IntervalAnimatable<T> extends Animatable<T> {
   /// The relative end to of [animatable]
   /// If your [AnimationController] is running from 0->1, this needs to be a value between those two
   final double end;
-
-  IntervalAnimatable(
-      {@required this.animatable,
-      @required this.defaultAnimatable,
-      @required this.begin,
-      @required this.end});
 
   @override
   T evaluate(Animation<double> animation) {
