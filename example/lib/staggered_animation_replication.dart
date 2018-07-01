@@ -20,37 +20,37 @@ class _StaggeredAnimationReplicationState extends State<StaggeredAnimationReplic
 
     sequenceAnimation = new SequenceAnimationBuilder()
      .addAnimatable(
-        anim: new Tween<double>(begin: 0.0, end: 1.0),
+        animatable: new Tween<double>(begin: 0.0, end: 1.0),
         from: Duration.zero,
         to: const Duration(milliseconds: 200),
         curve: Curves.ease,
         tag: "opacity"
     ).addAnimatable(
-        anim: new Tween<double>(begin: 50.0, end: 150.0),
+        animatable: new Tween<double>(begin: 50.0, end: 150.0),
         from: const Duration(milliseconds: 250),
         to: const Duration(milliseconds: 500),
         curve: Curves.ease,
         tag: "width"
     ).addAnimatable(
-        anim: new Tween<double>(begin: 50.0, end: 150.0),
+        animatable: new Tween<double>(begin: 50.0, end: 150.0),
         from: const Duration(milliseconds: 500),
         to: const Duration(milliseconds: 750),
         curve: Curves.ease,
         tag: "height"
     ).addAnimatable(
-        anim: new EdgeInsetsTween(begin: const EdgeInsets.only(bottom: 16.0), end: const EdgeInsets.only(bottom: 75.0),),
+        animatable: new EdgeInsetsTween(begin: const EdgeInsets.only(bottom: 16.0), end: const EdgeInsets.only(bottom: 75.0),),
         from: const Duration(milliseconds: 500),
         to: const Duration(milliseconds: 750),
         curve: Curves.ease,
         tag: "padding"
     ).addAnimatable(
-        anim: new BorderRadiusTween(begin: new BorderRadius.circular(4.0), end: new BorderRadius.circular(75.0),),
+        animatable: new BorderRadiusTween(begin: new BorderRadius.circular(4.0), end: new BorderRadius.circular(75.0),),
         from: const Duration(milliseconds: 750),
         to: const Duration(milliseconds: 1000),
         curve: Curves.ease,
         tag: "borderRadius"
     ).addAnimatable(
-        anim: new ColorTween(begin: Colors.indigo[100], end: Colors.orange[400],),
+        animatable: new ColorTween(begin: Colors.indigo[100], end: Colors.orange[400],),
         from: const Duration(milliseconds: 1000),
         to: const Duration(milliseconds: 1500),
         curve: Curves.ease,
