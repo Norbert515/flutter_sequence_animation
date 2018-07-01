@@ -29,7 +29,7 @@ void main() {
     SequenceAnimation sequenceAnimation = new SequenceAnimationBuilder()
         .addAnimatable(
         tag: seqKey,
-        anim: new ColorTween(begin: Colors.red, end: Colors.yellow),
+        animatable: new ColorTween(begin: Colors.red, end: Colors.yellow),
         from: const Duration(seconds: 0),
         to: const Duration(seconds: 1))
         .animate(controller);
@@ -78,22 +78,22 @@ void main() {
     SequenceAnimation sequenceAnimation = new SequenceAnimationBuilder()
         .addAnimatable(
         tag: seqKey,
-        anim: new ColorTween(begin: Colors.red, end: Colors.blue),
+        animatable: new ColorTween(begin: Colors.red, end: Colors.blue),
         from: const Duration(seconds: 0),
         to: const Duration(seconds: 1))
         .addAnimatable(
         tag: seqKey,
-        anim: new ColorTween(begin: Colors.blue, end: Colors.green),
+        animatable: new ColorTween(begin: Colors.blue, end: Colors.green),
         from: const Duration(seconds: 1),
         to: const Duration(seconds: 2))
         .addAnimatable(
         tag: seqKey,
-        anim: new ColorTween(begin: Colors.green, end: Colors.deepPurple),
+        animatable: new ColorTween(begin: Colors.green, end: Colors.deepPurple),
         from: const Duration(seconds: 2),
         to: const Duration(seconds: 3))
         .addAnimatable(
         tag: seqKey,
-        anim: new ColorTween(begin: Colors.deepPurple, end: Colors.brown),
+        animatable: new ColorTween(begin: Colors.deepPurple, end: Colors.brown),
         from: const Duration(seconds: 3),
         to: const Duration(seconds: 4))
         .animate(controller);
@@ -170,27 +170,27 @@ void main() {
     SequenceAnimation sequenceAnimation = new SequenceAnimationBuilder()
         .addAnimatable(
         tag: colorKey,
-        anim: new ColorTween(begin: Colors.red, end: Colors.blue),
+        animatable: new ColorTween(begin: Colors.red, end: Colors.blue),
         from: const Duration(seconds: 0),
         to: const Duration(seconds: 1))
         .addAnimatable(
         tag: widthKey,
-        anim: new Tween<double>(begin: 50.0, end: 500.0),
+        animatable: new Tween<double>(begin: 50.0, end: 500.0),
         from: const Duration(seconds: 1),
         to: const Duration(seconds: 5))
         .addAnimatable(
         tag: colorKey,
-        anim: new ColorTween(begin: Colors.blue, end: Colors.green),
+        animatable: new ColorTween(begin: Colors.blue, end: Colors.green),
         from: const Duration(seconds: 1),
         to: const Duration(seconds: 2))
         .addAnimatable(
         tag: colorKey,
-        anim: new ColorTween(begin: Colors.green, end: Colors.deepPurple),
+        animatable: new ColorTween(begin: Colors.green, end: Colors.deepPurple),
         from: const Duration(seconds: 2),
         to: const Duration(seconds: 3))
         .addAnimatable(
         tag: colorKey,
-        anim: new ColorTween(begin: Colors.deepPurple, end: Colors.brown),
+        animatable: new ColorTween(begin: Colors.deepPurple, end: Colors.brown),
         from: const Duration(seconds: 3),
         to: const Duration(seconds: 4))
         .animate(controller);
@@ -244,12 +244,12 @@ void main() {
       new SequenceAnimationBuilder()
           .addAnimatable(
           tag: "s",
-          anim: new ColorTween(begin: Colors.red, end: Colors.yellow),
+          animatable: new ColorTween(begin: Colors.red, end: Colors.yellow),
           from: const Duration(seconds: 0),
           to: const Duration(seconds: 2))
           .addAnimatable(
           tag: "s",
-          anim: new ColorTween(begin: Colors.red, end: Colors.yellow),
+          animatable: new ColorTween(begin: Colors.red, end: Colors.yellow),
           from: const Duration(seconds: 1),
           to: const Duration(seconds: 2))
           .animate(controller);
@@ -262,12 +262,12 @@ void main() {
       new SequenceAnimationBuilder()
           .addAnimatable(
           tag: "s",
-          anim: new ColorTween(begin: Colors.red, end: Colors.yellow),
+          animatable: new ColorTween(begin: Colors.red, end: Colors.yellow),
           from: const Duration(seconds: 0),
           to: const Duration(milliseconds: 2000))
           .addAnimatable(
           tag: "s",
-          anim: new ColorTween(begin: Colors.red, end: Colors.yellow),
+          animatable: new ColorTween(begin: Colors.red, end: Colors.yellow),
           from: const Duration(milliseconds: 1999),
           to: const Duration(milliseconds: 2001))
           .animate(controller);
@@ -283,12 +283,12 @@ void main() {
       new SequenceAnimationBuilder()
           .addAnimatable(
           tag: "s",
-          anim: new ColorTween(begin: Colors.red, end: Colors.yellow),
+          animatable: new ColorTween(begin: Colors.red, end: Colors.yellow),
           from: const Duration(seconds: 0),
           to: const Duration(seconds: 2))
           .addAnimatable(
           tag: "s",
-          anim: new Tween<double>(begin: 0.0, end: 100.0),
+          animatable: new Tween<double>(begin: 0.0, end: 100.0),
           from: const Duration(seconds: 3),
           to: const Duration(seconds: 4))
           .animate(controller);
@@ -306,7 +306,7 @@ void main() {
     SequenceAnimation sequenceAnimation = new SequenceAnimationBuilder()
         .addAnimatable(
         tag: seqKey,
-        anim: new ColorTween(begin: Colors.red, end: Colors.yellow),
+        animatable: new ColorTween(begin: Colors.red, end: Colors.yellow),
         from: const Duration(seconds: 0),
         to: const Duration(seconds: 1))
         .animate(controller);

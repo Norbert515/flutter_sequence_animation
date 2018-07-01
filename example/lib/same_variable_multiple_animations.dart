@@ -23,30 +23,30 @@ class _SameVariableAnimationPageState extends State<SameVariableAnimationPage> w
 
     sequenceAnimation = new SequenceAnimationBuilder()
       .addAnimatable(
-            anim: new ColorTween(begin: Colors.red, end: Colors.yellow),
+            animatable: new ColorTween(begin: Colors.red, end: Colors.yellow),
             from:  const Duration(seconds: 0),
             to: const Duration(seconds: 4),
             tag: "color"
         ).addAnimatable(
-            anim: new Tween<double>(begin: 50.0, end: 300.0),
+            animatable: new Tween<double>(begin: 50.0, end: 300.0),
             from:  const Duration(seconds: 0),
             to: const Duration(milliseconds: 3000),
             tag: "width",
             curve: Curves.easeIn
         ).addAnimatable(
-            anim: new Tween<double>(begin: 300.0, end: 100.0),
+            animatable: new Tween<double>(begin: 300.0, end: 100.0),
             from:  const Duration(milliseconds: 3000),
             to: const Duration(milliseconds: 3700),
             tag: "width",
             curve: Curves.decelerate
         ).addAnimatable(
-            anim: new Tween<double>(begin: 50.0, end: 300.0),
+            animatable: new Tween<double>(begin: 50.0, end: 300.0),
             from:  const Duration(seconds: 0),
             to: const Duration(milliseconds: 3000),
             tag: "height",
             curve: Curves.ease
         ).addAnimatable(
-            anim: new Tween<double>(begin: 300.0, end: 450.0),
+            animatable: new Tween<double>(begin: 300.0, end: 450.0),
             from:  const Duration(milliseconds: 3000),
             to: const Duration(milliseconds: 3800),
             tag: "height",
