@@ -31,12 +31,14 @@ class SequenceAnimationBuilder {
   /// ## Sample code
   ///
   /// ```dart
-  ///     var sequenceAnimation = new SequenceAnimationBuilder()
-  ///      .addAnimatable(
-  ///        animatable: new ColorTween(begin: Colors.red, end: Colors.yellow),
-  ///        from:  const Duration(seconds: 0),
-  ///        to: const Duration(seconds: 2),
-  ///        tag: "color").animate(controller);
+  ///     SequenceAnimation sequenceAnimation = new SequenceAnimationBuilder()
+  ///         .addAnimatable(
+  ///           animatable: new ColorTween(begin: Colors.red, end: Colors.yellow),
+  ///           from: const Duration(seconds: 0),
+  ///           to: const Duration(seconds: 2),
+  ///           tag: "color",
+  ///         )
+  ///         .animate(controller);
   /// ```
   ///
   SequenceAnimationBuilder addAnimatable({
@@ -56,7 +58,7 @@ class SequenceAnimationBuilder {
   SequenceAnimation animate(AnimationController controller) {
     int longestTimeMicro = 0;
     _animations.forEach((info) {
-      var micro = info.to.inMicroseconds;
+      int micro = info.to.inMicroseconds;
       if (micro > longestTimeMicro) {
         longestTimeMicro = micro;
       }
@@ -64,15 +66,15 @@ class SequenceAnimationBuilder {
     // Sets the duration of the controller
     controller.duration = new Duration(microseconds: longestTimeMicro);
 
-    var animatables = <Object, Animatable>{};
-    var begins = <Object, double>{};
-    var ends = <Object, double>{};
+    Map<Object, Animatable> animatables = {};
+    Map<Object, double> begins = {};
+    Map<Object, double> ends = {};
 
     _animations.forEach((info) {
       assert(info.to.inMicroseconds <= longestTimeMicro);
 
-      var begin = info.from.inMicroseconds / longestTimeMicro;
-      var end = info.to.inMicroseconds / longestTimeMicro;
+      double begin = info.from.inMicroseconds / longestTimeMicro;
+      double end = info.to.inMicroseconds / longestTimeMicro;
       Interval intervalCurve = new Interval(begin, end, curve: info.curve);
       if (animatables[info.tag] == null) {
         animatables[info.tag] =
@@ -96,7 +98,7 @@ class SequenceAnimationBuilder {
       }
     });
 
-    var result = <Object, Animation>{};
+    Map<Object, Animation> result = {};
 
     animatables.forEach((tag, animInfo) {
       result[tag] = animInfo.animate(controller);
