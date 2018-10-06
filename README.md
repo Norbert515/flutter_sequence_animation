@@ -6,6 +6,15 @@
 ### - Intuitive and easy to use interface
 
 # Installation
+
+This [PR](https://github.com/flutter/flutter/pull/21540) introduced breaking changes to the animation
+API. If your are above that version use 
+
+```
+dependencies:
+  flutter_sequence_animation: "^3.0.0"
+```
+else
 ```
 dependencies:
   flutter_sequence_animation: "^2.0.0"
@@ -28,7 +37,7 @@ import 'package:flutter_sequence_animation/flutter_sequence_animation.dart';
 
 _The Staggered Animation example from [here](https://flutter.io/animations/staggered-animations/) is
 207 lines of [code](https://raw.githubusercontent.com/flutter/website/master/_includes/code/animation/basic_staggered_animation/main.dart) .
-The same animation with this package is 128 lines of [code](https://github.com/Norbert515/flutter_sequence_animation/blob/master/examples/lib/staggered_animation_replication.dart).
+The same animation with this package is 128 lines of [code](https://github.com/Norbert515/flutter_sequence_animation/blob/master/example/lib/staggered_animation_replication.dart).
 It is also much easier to read and edit._
 
 #### You specify a sequence of animatables like this:
@@ -81,7 +90,7 @@ new AnimatedBuilder(
 
 #### The animation duration is set automatically (don't change the duration of the controller yourself).
 
-### Sepcial thanks to Simon Slightfoot for the help!
+### Sepcial thanks to [Simon Lightfoot](https://github.com/slightfoot) for the help!
 
 
 ## Getting Started
