@@ -143,19 +143,18 @@ class IntervalAnimatable<T> extends Animatable<T> {
   /// If your [AnimationController] is running from 0->1, this needs to be a value between those two
   final double end;
 
-  @override
-  T evaluate(Animation<double> animation) {
-    double t = animation.value;
-    if (t >= begin && t <= end) {
-      return animatable.evaluate(animation);
-    } else {
-      return defaultAnimatable.evaluate(animation);
-    }
-  }
-
   /// Chains an [Animatable] with a [CurveTween] and the given [Interval].
   /// Basically, the animation is being constrained to the given interval
   static Animatable chainCurve(Animatable parent, Interval interval) {
     return parent.chain(new CurveTween(curve: interval));
+  }
+
+  @override
+  T transform(double t) {
+    if (t >= begin && t <= end) {
+      return animatable.transform(t);
+    } else {
+      return defaultAnimatable.transform(t);
+    }
   }
 }
