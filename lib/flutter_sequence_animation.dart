@@ -26,6 +26,47 @@ class SequenceAnimationBuilder {
     return Duration(microseconds: _currentLengthInMicroSeconds());
   }
 
+
+  /// Convenient wrapper to add an animatable after the last one with a specific tag finished is finished
+  ///
+  /// The tags must be comparable! Strings, enums work, when using objects, be sure to override the == method
+  ///
+  /// [delay] is the delay to when this animation should start after the last one finishes.
+  /// For example:
+  ///
+  ///```dart
+  ///     SequenceAnimation sequenceAnimation = new SequenceAnimationBuilder()
+  ///         .addAnimatable(
+  ///           animatable: new ColorTween(begin: Colors.red, end: Colors.yellow),
+  ///           from: const Duration(seconds: 0),
+  ///           to: const Duration(seconds: 2),
+  ///           tag: "color",
+  ///         ).addAnimatableAfterLastOneWithTag(
+  ///            animatable: new ColorTween(begin: Colors.red, end: Colors.yellow),
+  ///            delay: const Duration(seconds: 1),
+  ///            duration: const Duration(seconds: 1),
+  ///            tag: "animation",
+  ///            lastTag: "color",
+  ///         ).animate(controller);
+  ///
+  /// ```
+  ///
+  /// The animation with tag "animation" will start at second 3 and run until second 4.
+  ///
+  SequenceAnimationBuilder addAnimatableAfterLastOneWithTag({
+    @required Object lastTag,
+    @required Animatable animatable,
+    Duration delay: Duration.zero,
+    @required Duration duration,
+    Curve curve: Curves.linear,
+    @required Object tag,
+  }) {
+    assert(_animations.isNotEmpty, "Can not add animatable after last one if there is no animatable yet");
+    var start = _animations.lastWhere((it) => it.tag == lastTag, orElse: () => null)?.to;
+    assert(start != null, "Animation with tag $lastTag can not be found before $tag");
+    return addAnimatable(animatable: animatable, from: start + delay, to: start + delay + duration, tag: tag, curve: curve);
+  }
+
   /// Convenient wrapper to add an animatable after the last one is finished
   ///
   /// [delay] is the delay to when this animation should start after the last one finishes.
