@@ -21,6 +21,10 @@ class SequenceAnimationBuilder {
   List<_AnimationInformation> _animations = [];
 
 
+  // Returns the duration of the current animation chain
+  Duration getCurrentDuration() {
+    return Duration(microseconds: _currentLengthInMicroSeconds());
+  }
 
   /// Convenient wrapper to add an animatable after the last one is finished
   ///
@@ -104,8 +108,7 @@ class SequenceAnimationBuilder {
     return this;
   }
 
-  /// The controllers duration is going to be overwritten by this class, you should not specify it on your own
-  SequenceAnimation animate(AnimationController controller) {
+  int _currentLengthInMicroSeconds() {
     int longestTimeMicro = 0;
     _animations.forEach((info) {
       int micro = info.to.inMicroseconds;
@@ -113,6 +116,12 @@ class SequenceAnimationBuilder {
         longestTimeMicro = micro;
       }
     });
+    return longestTimeMicro;
+  }
+
+  /// The controllers duration is going to be overwritten by this class, you should not specify it on your own
+  SequenceAnimation animate(AnimationController controller) {
+    int longestTimeMicro = _currentLengthInMicroSeconds();
     // Sets the duration of the controller
     controller.duration = new Duration(microseconds: longestTimeMicro);
 
