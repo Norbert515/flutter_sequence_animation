@@ -1,24 +1,19 @@
 # flutter_sequence_animation
 
-### - No need to use intervals and calculate percentages for your total animation time. 
-### - Animate the same variable with multiple animatables!
-### - You only need one AnimationController
-### - Intuitive and easy to use interface
+### Features
+- No need to use intervals and calculate percentages for your total animation time. 
+- Animate the same variable with multiple animatables!
+- You only need one AnimationController
+- Intuitive and easy to use interface
 
 # Installation
 
-This [PR](https://github.com/flutter/flutter/pull/21540) introduced breaking changes to the animation
-API. If your are above that version use 
 
 ```
 dependencies:
   flutter_sequence_animation: "^3.0.0"
 ```
-else
-```
-dependencies:
-  flutter_sequence_animation: "^2.0.0"
-```
+
 
 then
 ```
