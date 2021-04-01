@@ -11,10 +11,9 @@ class SameVariableAnimationPage extends StatefulWidget {
 class _SameVariableAnimationPageState extends State<SameVariableAnimationPage> with SingleTickerProviderStateMixin{
 
 
-  AnimationController controller;
-  SequenceAnimation sequenceAnimation;
+  late AnimationController controller;
+  late SequenceAnimation sequenceAnimation;
 
-  bool forward;
 
   @override
   void initState() {

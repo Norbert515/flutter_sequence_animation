@@ -11,10 +11,9 @@ class SequencePage extends StatefulWidget {
 class _SequencePageState extends State<SequencePage> with SingleTickerProviderStateMixin{
 
 
-  AnimationController controller;
-  SequenceAnimation sequenceAnimation;
+  late AnimationController controller;
+  late SequenceAnimation sequenceAnimation;
 
-  bool forward;
 
   @override
   void initState() {

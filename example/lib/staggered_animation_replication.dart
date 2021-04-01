@@ -10,8 +10,8 @@ class StaggeredAnimationReplication extends StatefulWidget {
 
 class _StaggeredAnimationReplicationState extends State<StaggeredAnimationReplication> with SingleTickerProviderStateMixin{
 
-  AnimationController controller;
-  SequenceAnimation sequenceAnimation;
+  late AnimationController controller;
+  late SequenceAnimation sequenceAnimation;
 
   @override
   void initState() {
@@ -64,7 +64,7 @@ class _StaggeredAnimationReplicationState extends State<StaggeredAnimationReplic
     super.dispose();
   }
 
-  Widget _buildAnimation(BuildContext context, Widget child) {
+  Widget _buildAnimation(BuildContext context, Widget? child) {
     return new Container(
       padding: sequenceAnimation["padding"].value,
       alignment: Alignment.bottomCenter,
@@ -76,7 +76,7 @@ class _StaggeredAnimationReplicationState extends State<StaggeredAnimationReplic
           decoration: new BoxDecoration(
             color: sequenceAnimation["color"].value,
             border: new Border.all(
-              color: Colors.indigo[300],
+              color: Colors.indigo[300]!,
               width: 3.0,
             ),
             borderRadius: sequenceAnimation["borderRadius"].value,
