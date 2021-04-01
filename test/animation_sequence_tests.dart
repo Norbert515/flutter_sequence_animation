@@ -53,16 +53,16 @@ void main() {
 
     
     expect(find.byKey(key), findsOneWidget);
-    BoxDecoration decoration = tester.widget<Container>(find.byKey(key)).decoration;
-    expect(decoration.color, Colors.red);
+    Color color = tester.widget<Container>(find.byKey(key)).color!;
+    expect(color, Colors.red);
 
 
     controller.forward();
     await tester.pumpAndSettle();
 
 
-    decoration = tester.widget<Container>(find.byKey(key)).decoration;
-    expect(decoration.color, Colors.yellow);
+    color = tester.widget<Container>(find.byKey(key)).color!;
+    expect(color, Colors.yellow);
 
   });
 //https://docs.flutter.io/flutter/package-test_test/throwsA.html
@@ -117,16 +117,16 @@ void main() {
 
 
     expect(find.byKey(key), findsOneWidget);
-    BoxDecoration decoration = tester.widget<Container>(find.byKey(key)).decoration;
-    expect(decoration.color, Colors.red);
+    Color color = tester.widget<Container>(find.byKey(key)).color!;
+    expect(color, Colors.red);
 
 
     controller.forward();
     await tester.pumpAndSettle();
 
 
-    decoration = tester.widget<Container>(find.byKey(key)).decoration;
-    expect(decoration.color, Colors.brown);
+    color = tester.widget<Container>(find.byKey(key)).color!;
+    expect(color, Colors.brown);
 
   });
 
@@ -177,16 +177,16 @@ void main() {
 
 
     expect(find.byKey(key), findsOneWidget);
-    BoxDecoration decoration = tester.widget<Container>(find.byKey(key)).decoration;
-    expect(decoration.color, Colors.red);
+    Color color = tester.widget<Container>(find.byKey(key)).color!;
+    expect(color, Colors.red);
 
 
     controller.forward();
     await tester.pumpAndSettle();
 
 
-    decoration = tester.widget<Container>(find.byKey(key)).decoration;
-    expect(decoration.color, Colors.brown);
+    color = tester.widget<Container>(find.byKey(key)).color!;
+    expect(color, Colors.brown);
 
   });
 
@@ -273,10 +273,10 @@ void main() {
 
 
     expect(find.byKey(key), findsOneWidget);
-    BoxDecoration decoration = tester.widget<Container>(find.byKey(key)).decoration;
-    expect(decoration.color, Colors.red);
+    Color color = tester.widget<Container>(find.byKey(key)).color!;
+    expect(color, Colors.red);
 
-    BoxConstraints constraints = tester.widget<Container>(find.byKey(key)).constraints;
+    BoxConstraints constraints = tester.widget<Container>(find.byKey(key)).constraints!;
     expect(constraints.minWidth, 50.0);
     expect(constraints.maxWidth, 50.0);
 
@@ -285,9 +285,9 @@ void main() {
     await tester.pumpAndSettle();
 
 
-    decoration = tester.widget<Container>(find.byKey(key)).decoration;
-    expect(decoration.color, Colors.brown);
-    constraints = tester.widget<Container>(find.byKey(key)).constraints;
+    color = tester.widget<Container>(find.byKey(key)).color!;
+    expect(color, Colors.brown);
+    constraints = tester.widget<Container>(find.byKey(key)).constraints!;
     expect(constraints.minWidth, 500.0);
     expect(constraints.maxWidth, 500.0);
 
@@ -389,16 +389,16 @@ void main() {
 
 
     expect(find.byKey(key), findsOneWidget);
-    BoxDecoration decoration = tester.widget<Container>(find.byKey(key)).decoration;
-    expect(decoration.color, Colors.red);
+    Color color = tester.widget<Container>(find.byKey(key)).color!;
+    expect(color, Colors.red);
 
 
     controller.forward();
     await tester.pumpAndSettle();
 
 
-    decoration = tester.widget<Container>(find.byKey(key)).decoration;
-    expect(decoration.color, Colors.yellow);
+    color = tester.widget<Container>(find.byKey(key)).color!;
+    expect(color, Colors.yellow);
 
 
   });

@@ -3,11 +3,11 @@ import 'package:meta/meta.dart';
 
 class _AnimationInformation {
   _AnimationInformation({
-    this.animatable,
-    this.from,
-    this.to,
-    this.curve,
-    this.tag,
+    required this.animatable,
+    required this.from,
+    required this.to,
+    required this.curve,
+    required this.tag,
   });
 
   final Animatable animatable;
@@ -54,16 +54,17 @@ class SequenceAnimationBuilder {
   /// The animation with tag "animation" will start at second 3 and run until second 4.
   ///
   SequenceAnimationBuilder addAnimatableAfterLastOneWithTag({
-    @required Object lastTag,
-    @required Animatable animatable,
+    required Object lastTag,
+    required Animatable animatable,
     Duration delay: Duration.zero,
-    @required Duration duration,
+    required Duration duration,
     Curve curve: Curves.linear,
-    @required Object tag,
+    required Object tag,
   }) {
     assert(_animations.isNotEmpty, "Can not add animatable after last one if there is no animatable yet");
-    var start = _animations.lastWhere((it) => it.tag == lastTag, orElse: () => null)?.to;
+    var start = _animations.cast<_AnimationInformation?>().lastWhere((it) => it?.tag == lastTag, orElse: () => null)?.to;
     assert(start != null, "Animation with tag $lastTag can not be found before $tag");
+    start!;
     return addAnimatable(animatable: animatable, from: start + delay, to: start + delay + duration, tag: tag, curve: curve);
   }
 
@@ -91,11 +92,11 @@ class SequenceAnimationBuilder {
   /// The animation with tag "animation" will start at second 3 and run until second 4.
   ///
   SequenceAnimationBuilder addAnimatableAfterLastOne({
-    @required Animatable animatable,
+    required Animatable animatable,
     Duration delay: Duration.zero,
-    @required Duration duration,
+    required Duration duration,
     Curve curve: Curves.linear,
-    @required Object tag,
+    required Object tag,
   }) {
     assert(_animations.isNotEmpty, "Can not add animatable after last one if there is no animatable yet");
     var start = _animations.last.to;
@@ -106,11 +107,11 @@ class SequenceAnimationBuilder {
   ///
   /// Instead of specifying from and to, you specify start and duration
   SequenceAnimationBuilder addAnimatableUsingDuration({
-    @required Animatable animatable,
-    @required Duration start,
-    @required Duration duration,
+    required Animatable animatable,
+    required Duration start,
+    required Duration duration,
     Curve curve: Curves.linear,
-    @required Object tag,
+    required Object tag,
     }) {
     return addAnimatable(animatable: animatable, from: start, to: start + duration, tag: tag, curve: curve);
   }
@@ -137,11 +138,11 @@ class SequenceAnimationBuilder {
   /// ```
   ///
   SequenceAnimationBuilder addAnimatable({
-    @required Animatable animatable,
-    @required Duration from,
-    @required Duration to,
+    required Animatable animatable,
+    required Duration from,
+    required Duration to,
     Curve curve: Curves.linear,
-    @required Object tag,
+    required Object tag,
   }) {
     assert(to >= from);
     _animations.add(new _AnimationInformation(
@@ -183,18 +184,18 @@ class SequenceAnimationBuilder {
         ends[info.tag] = end;
       } else {
         assert(
-            ends[info.tag] <= begin,
+            ends[info.tag]! <= begin,
             "When animating the same property you need to: \n"
             "a) Have them not overlap \n"
             "b) Add them in an ordered fashion\n"
             "Animation with tag ${info.tag} ends at ${ends[info.tag]} but also begins at $begin"
         );
         animatables[info.tag] = new IntervalAnimatable(
-          animatable: animatables[info.tag],
+          animatable: animatables[info.tag]!,
           defaultAnimatable:
               IntervalAnimatable.chainCurve(info.animatable, intervalCurve),
-          begin: begins[info.tag],
-          end: ends[info.tag],
+          begin: begins[info.tag]!,
+          end: ends[info.tag]!,
         );
         ends[info.tag] = end;
       }
@@ -220,7 +221,7 @@ class SequenceAnimation {
   Animation operator [](Object key) {
     assert(_animations.containsKey(key),
         "There was no animatable with the key: $key");
-    return _animations[key];
+    return _animations[key]!;
   }
 }
 
@@ -228,10 +229,10 @@ class SequenceAnimation {
 /// if not it evaluates the [defaultAnimatable]
 class IntervalAnimatable<T> extends Animatable<T> {
   IntervalAnimatable({
-    @required this.animatable,
-    @required this.defaultAnimatable,
-    @required this.begin,
-    @required this.end,
+    required this.animatable,
+    required this.defaultAnimatable,
+    required this.begin,
+    required this.end,
   });
 
   final Animatable animatable;
