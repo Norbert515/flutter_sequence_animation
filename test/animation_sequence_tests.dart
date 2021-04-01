@@ -130,6 +130,65 @@ void main() {
 
   });
 
+  testWidgets('Sequence animation with 4 colors add after API', (WidgetTester tester) async {
+
+
+    AnimationController controller = new AnimationController(vsync: const TestVSync());
+
+    expect(controller.duration, isNull);
+
+    String seqKey = "color";
+    SequenceAnimation sequenceAnimation = new SequenceAnimationBuilder()
+        .addAnimatable(
+        tag: seqKey,
+        animatable: new ColorTween(begin: Colors.red, end: Colors.blue),
+        from: const Duration(seconds: 0),
+        to: const Duration(seconds: 1))
+        .addAnimatableAfterLastOne(
+        tag: seqKey,
+        animatable: new ColorTween(begin: Colors.blue, end: Colors.green),
+        duration: const Duration(seconds: 1))
+        .addAnimatableAfterLastOne(
+        tag: seqKey,
+        animatable: new ColorTween(begin: Colors.green, end: Colors.deepPurple),
+        duration: const Duration(seconds: 1))
+        .addAnimatableAfterLastOne(
+        tag: seqKey,
+        animatable: new ColorTween(begin: Colors.deepPurple, end: Colors.brown),
+        duration: const Duration(seconds: 1))
+        .animate(controller);
+
+
+
+    expect(controller.duration, equals(const Duration(seconds: 4)));
+
+
+    ValueKey key = new ValueKey("color");
+
+    // Build our app and trigger a frame.
+    await tester.pumpWidget(new AnimatedBuilder(animation: controller, builder: (context, child) {
+      return new Container(
+        key: key,
+        width: 200.0,
+        height: 200.0,
+        color: sequenceAnimation[seqKey].value,
+      );
+    }));
+
+
+    expect(find.byKey(key), findsOneWidget);
+    BoxDecoration decoration = tester.widget<Container>(find.byKey(key)).decoration;
+    expect(decoration.color, Colors.red);
+
+
+    controller.forward();
+    await tester.pumpAndSettle();
+
+
+    decoration = tester.widget<Container>(find.byKey(key)).decoration;
+    expect(decoration.color, Colors.brown);
+
+  });
 
 
   testWidgets('Sequence with no animations', (WidgetTester tester) async {
