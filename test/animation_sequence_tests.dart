@@ -25,7 +25,7 @@ void main() {
 
     expect(controller.duration, isNull);
 
-    String seqKey = "color";
+    const seqKey = const SequenceAnimationTag<Color>("color");
     SequenceAnimation sequenceAnimation = new SequenceAnimationBuilder()
         .addAnimatable(
         tag: seqKey,
@@ -39,7 +39,7 @@ void main() {
     expect(controller.duration, isNotNull);
 
 
-    ValueKey key = new ValueKey("color");
+    final key = new ValueKey("color");
     
     // Build our app and trigger a frame.
     await tester.pumpWidget(new AnimatedBuilder(animation: controller, builder: (context, child) {
@@ -47,7 +47,7 @@ void main() {
         key: key,
         width: 200.0,
         height: 200.0,
-        color: sequenceAnimation[seqKey].value,
+        color: sequenceAnimation.get(seqKey).value,
       );
     }));
 
@@ -74,10 +74,11 @@ void main() {
 
     expect(controller.duration, isNull);
 
-    String seqKey = "color";
+    const seqKey = const SequenceAnimationTag<Color>("color");
     SequenceAnimation sequenceAnimation = new SequenceAnimationBuilder()
         .addAnimatable(
         tag: seqKey,
+        //animatable: Tween<double>(),
         animatable: new ColorTween(begin: Colors.red, end: Colors.blue),
         from: const Duration(seconds: 0),
         to: const Duration(seconds: 1))
@@ -103,7 +104,7 @@ void main() {
     expect(controller.duration, equals(const Duration(seconds: 4)));
 
 
-    ValueKey key = new ValueKey("color");
+    final key = new ValueKey("color");
 
     // Build our app and trigger a frame.
     await tester.pumpWidget(new AnimatedBuilder(animation: controller, builder: (context, child) {
@@ -111,7 +112,7 @@ void main() {
         key: key,
         width: 200.0,
         height: 200.0,
-        color: sequenceAnimation[seqKey].value,
+        color: sequenceAnimation.get(seqKey).value,
       );
     }));
 
@@ -137,7 +138,7 @@ void main() {
 
     expect(controller.duration, isNull);
 
-    String seqKey = "color";
+    const seqKey = const SequenceAnimationTag<Color>("color");
     SequenceAnimation sequenceAnimation = new SequenceAnimationBuilder()
         .addAnimatable(
         tag: seqKey,
@@ -163,7 +164,7 @@ void main() {
     expect(controller.duration, equals(const Duration(seconds: 4)));
 
 
-    ValueKey key = new ValueKey("color");
+    final key = new ValueKey("color");
 
     // Build our app and trigger a frame.
     await tester.pumpWidget(new AnimatedBuilder(animation: controller, builder: (context, child) {
@@ -171,7 +172,7 @@ void main() {
         key: key,
         width: 200.0,
         height: 200.0,
-        color: sequenceAnimation[seqKey].value,
+        color: sequenceAnimation.get(seqKey).value,
       );
     }));
 
@@ -204,7 +205,7 @@ void main() {
     expect(controller.duration, equals(const Duration(seconds: 0)));
 
     try {
-      sequenceAnimation["doesntExit"];
+      sequenceAnimation.get(SequenceAnimationTag<bool>("doesntExit"));
     } catch(e) {
       expect(e,isAssertionError);
     }
@@ -224,8 +225,9 @@ void main() {
 
     expect(controller.duration, isNull);
 
-    String colorKey = "color";
-    String widthKey = "width";
+    const colorKey = const SequenceAnimationTag<Color>("color");
+    const widthKey = const SequenceAnimationTag<double>("width");
+
     SequenceAnimation sequenceAnimation = new SequenceAnimationBuilder()
         .addAnimatable(
         tag: colorKey,
@@ -234,7 +236,7 @@ void main() {
         to: const Duration(seconds: 1))
         .addAnimatable(
         tag: widthKey,
-        animatable: new Tween<double>(begin: 50.0, end: 500.0),
+        animatable: new Tween(begin: 50.0, end: 500.0),
         from: const Duration(seconds: 1),
         to: const Duration(seconds: 5))
         .addAnimatable(
@@ -259,15 +261,15 @@ void main() {
     expect(controller.duration, equals(const Duration(seconds: 5)));
 
 
-    ValueKey key = new ValueKey("color");
+    final key = new ValueKey("color");
 
     // Build our app and trigger a frame.
     await tester.pumpWidget(new AnimatedBuilder(animation: controller, builder: (context, child) {
       return new Container(
         key: key,
-        width: sequenceAnimation[widthKey].value,
+        width: sequenceAnimation.get(widthKey).value,
         height: 200.0,
-        color: sequenceAnimation[colorKey].value,
+        color: sequenceAnimation.get(colorKey).value,
       );
     }));
 
@@ -299,15 +301,17 @@ void main() {
 
     AnimationController controller = new AnimationController(vsync: const TestVSync());
 
+    const tag = const SequenceAnimationTag<Color>("s");
+
     try {
       new SequenceAnimationBuilder()
           .addAnimatable(
-          tag: "s",
+          tag: tag,
           animatable: new ColorTween(begin: Colors.red, end: Colors.yellow),
           from: const Duration(seconds: 0),
           to: const Duration(seconds: 2))
           .addAnimatable(
-          tag: "s",
+          tag: tag,
           animatable: new ColorTween(begin: Colors.red, end: Colors.yellow),
           from: const Duration(seconds: 1),
           to: const Duration(seconds: 2))
@@ -320,12 +324,12 @@ void main() {
     try {
       new SequenceAnimationBuilder()
           .addAnimatable(
-          tag: "s",
+          tag: tag,
           animatable: new ColorTween(begin: Colors.red, end: Colors.yellow),
           from: const Duration(seconds: 0),
           to: const Duration(milliseconds: 2000))
           .addAnimatable(
-          tag: "s",
+          tag: tag,
           animatable: new ColorTween(begin: Colors.red, end: Colors.yellow),
           from: const Duration(milliseconds: 1999),
           to: const Duration(milliseconds: 2001))
@@ -336,32 +340,12 @@ void main() {
   });
 
 
-  testWidgets('Same tag but different types', (WidgetTester tester) async {
-    AnimationController controller = new AnimationController(vsync: const TestVSync());
-    try {
-      new SequenceAnimationBuilder()
-          .addAnimatable(
-          tag: "s",
-          animatable: new ColorTween(begin: Colors.red, end: Colors.yellow),
-          from: const Duration(seconds: 0),
-          to: const Duration(seconds: 2))
-          .addAnimatable(
-          tag: "s",
-          animatable: new Tween<double>(begin: 0.0, end: 100.0),
-          from: const Duration(seconds: 3),
-          to: const Duration(seconds: 4))
-          .animate(controller);
-    } catch(e) {
-      expect(e, isAssertionError);
-    }
-  });
-
-
   testWidgets('Uses object key', (WidgetTester tester) async {
 
     AnimationController controller = new AnimationController(vsync: const TestVSync());
 
-    Object seqKey = false;
+    const seqKey = const SequenceAnimationTag<Color>(false);
+
     SequenceAnimation sequenceAnimation = new SequenceAnimationBuilder()
         .addAnimatable(
         tag: seqKey,
@@ -375,7 +359,7 @@ void main() {
     expect(controller.duration, isNotNull);
 
 
-    ValueKey key = new ValueKey("color");
+    final key = new ValueKey("color");
 
     // Build our app and trigger a frame.
     await tester.pumpWidget(new AnimatedBuilder(animation: controller, builder: (context, child) {
@@ -383,7 +367,7 @@ void main() {
         key: key,
         width: 200.0,
         height: 200.0,
-        color: sequenceAnimation[seqKey].value,
+        color: sequenceAnimation.get(seqKey).value,
       );
     }));
 
