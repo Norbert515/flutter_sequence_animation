@@ -10,12 +10,12 @@ class StaggeredAnimationReplication extends StatefulWidget {
 
 class _StaggeredAnimationReplicationState extends State<StaggeredAnimationReplication> with SingleTickerProviderStateMixin{
 
-  static const opacityKey = SequenceAnimationTag<double>("opacity");
-  static const widthKey = SequenceAnimationTag<double>("width");
-  static const heightKey = SequenceAnimationTag<double>("height");
-  static const paddingKey = SequenceAnimationTag<EdgeInsets>("padding");
-  static const borderRadiusKey = SequenceAnimationTag<BorderRadius>("borderRadius");
-  static const colorKey = SequenceAnimationTag<Color?>("color");
+  static final opacityKey = SequenceAnimationTag<double>();
+  static final widthKey = SequenceAnimationTag<double>();
+  static final heightKey = SequenceAnimationTag<double>();
+  static final paddingKey = SequenceAnimationTag<EdgeInsets>();
+  static final borderRadiusKey = SequenceAnimationTag<BorderRadius>();
+  static final colorKey = SequenceAnimationTag<Color?>();
 
   late AnimationController controller;
   late SequenceAnimation sequenceAnimation;

@@ -11,9 +11,9 @@ class SameVariableAnimationPage extends StatefulWidget {
 
 class _SameVariableAnimationPageState extends State<SameVariableAnimationPage>
     with SingleTickerProviderStateMixin {
-  static const colorTag = SequenceAnimationTag<Color?>("color");
-  static const widthTag = SequenceAnimationTag<double>("width");
-  static const heightTag = SequenceAnimationTag<double>("height");
+  static final colorTag = SequenceAnimationTag<Color?>();
+  static final widthTag = SequenceAnimationTag<double>();
+  static final heightTag = SequenceAnimationTag<double>();
 
   late AnimationController controller;
   late SequenceAnimation sequenceAnimation;

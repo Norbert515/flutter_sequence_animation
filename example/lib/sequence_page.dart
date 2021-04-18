@@ -9,7 +9,7 @@ class SequencePage extends StatefulWidget {
 }
 
 class _SequencePageState extends State<SequencePage> with SingleTickerProviderStateMixin{
-  static const colorTag = SequenceAnimationTag<Color?>("color");
+  static final colorTag = SequenceAnimationTag<Color?>();
 
   late AnimationController controller;
   late SequenceAnimation sequenceAnimation;

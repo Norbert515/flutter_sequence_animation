@@ -29,20 +29,7 @@ class _AnimationInformation<T> {
       );
 }
 
-class SequenceAnimationTag<T> {
-  const SequenceAnimationTag(this.value);
-  final Object value;
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is SequenceAnimationTag &&
-          runtimeType == other.runtimeType &&
-          value == other.value;
-
-  @override
-  int get hashCode => value.hashCode;
-}
+class SequenceAnimationTag<T> {}
 
 class SequenceAnimationBuilder {
   List<_AnimationInformation> _animations = [];
@@ -264,7 +251,7 @@ class SequenceAnimation {
   /// Returns the animation with a given tag, this animation is tied to the controller.
   Animation<T> get<T>(SequenceAnimationTag<T> tag) {
     assert(_animations.containsKey(tag),
-        "There was no animatable with the tag: ${tag.value}");
+        "There was no animatable with the tag: $tag");
 
     return _animations[tag]! as Animation<T>;
   }
