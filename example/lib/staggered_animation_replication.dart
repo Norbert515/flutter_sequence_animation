@@ -15,7 +15,7 @@ class _StaggeredAnimationReplicationState extends State<StaggeredAnimationReplic
   static const heightKey = SequenceAnimationTag<double>("height");
   static const paddingKey = SequenceAnimationTag<EdgeInsets>("padding");
   static const borderRadiusKey = SequenceAnimationTag<BorderRadius>("borderRadius");
-  static const colorKey = SequenceAnimationTag<Color>("color");
+  static const colorKey = SequenceAnimationTag<Color?>("color");
 
   late AnimationController controller;
   late SequenceAnimation sequenceAnimation;
@@ -76,7 +76,7 @@ class _StaggeredAnimationReplicationState extends State<StaggeredAnimationReplic
       padding: sequenceAnimation.get(paddingKey).value,
       alignment: Alignment.bottomCenter,
       child: new Opacity(
-        opacity: sequenceAnimation.get(opacityKey).value ?? 0,
+        opacity: sequenceAnimation.get(opacityKey).value,
         child: new Container(
           width: sequenceAnimation.get(widthKey).value,
           height: sequenceAnimation.get(heightKey).value,

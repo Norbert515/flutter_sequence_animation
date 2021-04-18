@@ -9,19 +9,19 @@ class _AnimationInformation<T> {
     required this.tag,
   });
 
-  final Animatable<T?> animatable;
+  final Animatable<T> animatable;
   final Duration from;
   final Duration to;
   final Curve curve;
   final SequenceAnimationTag<T> tag;
 
-  IntervalAnimatable<T?> createIntervalAnimatable({
-    required Animatable<T?> animatable,
-    required Animatable<T?> defaultAnimatable,
+  IntervalAnimatable<T> createIntervalAnimatable({
+    required Animatable<T> animatable,
+    required Animatable<T> defaultAnimatable,
     required double begin,
     required double end,
   }) =>
-      IntervalAnimatable<T?>(
+      IntervalAnimatable<T>(
         animatable: animatable,
         defaultAnimatable: defaultAnimatable,
         begin: begin,
@@ -78,7 +78,7 @@ class SequenceAnimationBuilder {
   ///
   /// The animation with tag "animation" will start at second 3 and run until second 4.
   ///
-  SequenceAnimationBuilder addAnimatableAfterLastOneWithTag<T, A extends Animatable<T?>>({
+  SequenceAnimationBuilder addAnimatableAfterLastOneWithTag<T, A extends Animatable<T>>({
     required Object lastTag,
     required A animatable,
     Duration delay: Duration.zero,
@@ -126,7 +126,7 @@ class SequenceAnimationBuilder {
   ///
   /// The animation with tag "animation" will start at second 3 and run until second 4.
   ///
-  SequenceAnimationBuilder addAnimatableAfterLastOne<T, A extends Animatable<T?>>({
+  SequenceAnimationBuilder addAnimatableAfterLastOne<T, A extends Animatable<T>>({
     required A animatable,
     Duration delay: Duration.zero,
     required Duration duration,
@@ -147,7 +147,7 @@ class SequenceAnimationBuilder {
   /// Convenient wrapper around to specify an animatable using a duration instead of end point
   ///
   /// Instead of specifying from and to, you specify start and duration
-  SequenceAnimationBuilder addAnimatableUsingDuration<T, A extends Animatable<T?>>({
+  SequenceAnimationBuilder addAnimatableUsingDuration<T, A extends Animatable<T>>({
     required A animatable,
     required Duration start,
     required Duration duration,
@@ -183,7 +183,7 @@ class SequenceAnimationBuilder {
   ///         .animate(controller);
   /// ```
   ///
-  SequenceAnimationBuilder addAnimatable<T, A extends Animatable<T?>>({
+  SequenceAnimationBuilder addAnimatable<T, A extends Animatable<T>>({
     required A animatable,
     required Duration from,
     required Duration to,
@@ -262,11 +262,11 @@ class SequenceAnimation {
   SequenceAnimation._internal(this._animations);
 
   /// Returns the animation with a given tag, this animation is tied to the controller.
-  Animation<T?> get<T>(SequenceAnimationTag<T> tag) {
+  Animation<T> get<T>(SequenceAnimationTag<T> tag) {
     assert(_animations.containsKey(tag),
         "There was no animatable with the tag: ${tag.value}");
 
-    return _animations[tag]! as Animation<T?>;
+    return _animations[tag]! as Animation<T>;
   }
 }
 
@@ -301,7 +301,7 @@ class IntervalAnimatable<T> extends Animatable<T> {
   }
 }
 
-extension _Chain<T> on Animatable<T> {
+extension Chain<T> on Animatable<T> {
   /// Chains an [Animatable] with a [CurveTween] and the given [Interval].
   /// Basically, the animation is being constrained to the given interval
   Animatable<T> chainCurve(Interval interval) {

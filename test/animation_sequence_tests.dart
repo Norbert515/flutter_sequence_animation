@@ -25,7 +25,7 @@ void main() {
 
     expect(controller.duration, isNull);
 
-    const seqKey = const SequenceAnimationTag<Color>("color");
+    const seqKey = const SequenceAnimationTag<Color?>("color");
     SequenceAnimation sequenceAnimation = new SequenceAnimationBuilder()
         .addAnimatable(
         tag: seqKey,
@@ -74,7 +74,7 @@ void main() {
 
     expect(controller.duration, isNull);
 
-    const seqKey = const SequenceAnimationTag<Color>("color");
+    const seqKey = const SequenceAnimationTag<Color?>("color");
     SequenceAnimation sequenceAnimation = new SequenceAnimationBuilder()
         .addAnimatable(
         tag: seqKey,
@@ -138,7 +138,7 @@ void main() {
 
     expect(controller.duration, isNull);
 
-    const seqKey = const SequenceAnimationTag<Color>("color");
+    const seqKey = const SequenceAnimationTag<Color?>("color");
     SequenceAnimation sequenceAnimation = new SequenceAnimationBuilder()
         .addAnimatable(
         tag: seqKey,
@@ -225,7 +225,7 @@ void main() {
 
     expect(controller.duration, isNull);
 
-    const colorKey = const SequenceAnimationTag<Color>("color");
+    const colorKey = const SequenceAnimationTag<Color?>("color");
     const widthKey = const SequenceAnimationTag<double>("width");
 
     SequenceAnimation sequenceAnimation = new SequenceAnimationBuilder()
@@ -301,7 +301,7 @@ void main() {
 
     AnimationController controller = new AnimationController(vsync: const TestVSync());
 
-    const tag = const SequenceAnimationTag<Color>("s");
+    const tag = const SequenceAnimationTag<Color?>("s");
 
     try {
       new SequenceAnimationBuilder()
@@ -344,7 +344,7 @@ void main() {
 
     AnimationController controller = new AnimationController(vsync: const TestVSync());
 
-    const seqKey = const SequenceAnimationTag<Color>(false);
+    const seqKey = const SequenceAnimationTag<Color?>(false);
 
     SequenceAnimation sequenceAnimation = new SequenceAnimationBuilder()
         .addAnimatable(
