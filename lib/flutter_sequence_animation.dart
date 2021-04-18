@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class _AnimationInformation<T, A extends Animatable<T?>> {
+class _AnimationInformation<T> {
   _AnimationInformation({
     required this.animatable,
     required this.from,
@@ -9,7 +9,7 @@ class _AnimationInformation<T, A extends Animatable<T?>> {
     required this.tag,
   });
 
-  final A animatable;
+  final Animatable<T?> animatable;
   final Duration from;
   final Duration to;
   final Curve curve;
@@ -192,7 +192,7 @@ class SequenceAnimationBuilder {
   }) {
     assert(T.toString() != 'Object');
     assert(to >= from);
-    _animations.add(new _AnimationInformation<T, A>(
+    _animations.add(new _AnimationInformation<T>(
         animatable: animatable, from: from, to: to, curve: curve, tag: tag));
     return this;
   }
