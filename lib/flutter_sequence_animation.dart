@@ -29,7 +29,23 @@ class _AnimationInformation<T> {
       );
 }
 
-class SequenceAnimationTag<T> {}
+class SequenceAnimationTag<T> {
+  SequenceAnimationTag() : id = _id++;
+
+  const SequenceAnimationTag.id(this.id);
+
+  static int _id = 0;
+
+  final Object id;
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is SequenceAnimationTag &&
+          runtimeType == other.runtimeType &&
+          id == other.id;
+  @override
+  int get hashCode => id.hashCode;
+}
 
 class SequenceAnimationBuilder {
   List<_AnimationInformation> _animations = [];
