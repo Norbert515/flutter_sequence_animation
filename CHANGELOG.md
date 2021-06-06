@@ -13,3 +13,6 @@
 * To prevent code breaking version got bumped to 3.0.0
 * Thanks to MaximilianKlein for the PR!
 
+## [4.0.0-nullsafety]
+
+* Migrate to nullsafety
