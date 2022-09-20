@@ -11,7 +11,7 @@
 
 ```
 dependencies:
-  flutter_sequence_animation: "^4.0.0-nullsafety"
+  flutter_sequence_animation: "^4.0.0"
 ```
 
 
