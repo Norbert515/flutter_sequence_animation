@@ -5,56 +5,57 @@ import 'package:flutter_sequence_animation/flutter_sequence_animation.dart';
 
 class SameVariableAnimationPage extends StatefulWidget {
   @override
-  _SameVariableAnimationPageState createState() => new _SameVariableAnimationPageState();
+  _SameVariableAnimationPageState createState() =>
+      new _SameVariableAnimationPageState();
 }
 
-class _SameVariableAnimationPageState extends State<SameVariableAnimationPage> with SingleTickerProviderStateMixin{
-
+class _SameVariableAnimationPageState extends State<SameVariableAnimationPage>
+    with SingleTickerProviderStateMixin {
+  static final colorTag = SequenceAnimationTag<Color?>();
+  static final widthTag = SequenceAnimationTag<double>();
+  static final heightTag = SequenceAnimationTag<double>();
 
   late AnimationController controller;
   late SequenceAnimation sequenceAnimation;
 
-
   @override
   void initState() {
     super.initState();
-    controller = new AnimationController(vsync: this, duration: const Duration(seconds: 5));
+    controller = new AnimationController(
+        vsync: this, duration: const Duration(seconds: 5));
 
     sequenceAnimation = new SequenceAnimationBuilder()
-      .addAnimatable(
+        .addAnimatable(
             animatable: new ColorTween(begin: Colors.red, end: Colors.yellow),
-            from:  const Duration(seconds: 0),
+            from: const Duration(seconds: 0),
             to: const Duration(seconds: 4),
-            tag: "color"
-        ).addAnimatable(
+            tag: colorTag)
+        .addAnimatable(
             animatable: new Tween<double>(begin: 50.0, end: 300.0),
-            from:  const Duration(seconds: 0),
+            from: const Duration(seconds: 0),
             to: const Duration(milliseconds: 3000),
-            tag: "width",
-            curve: Curves.easeIn
-        ).addAnimatable(
+            tag: widthTag,
+            curve: Curves.easeIn)
+        .addAnimatable(
             animatable: new Tween<double>(begin: 300.0, end: 100.0),
-            from:  const Duration(milliseconds: 3000),
+            from: const Duration(milliseconds: 3000),
             to: const Duration(milliseconds: 3700),
-            tag: "width",
-            curve: Curves.decelerate
-        ).addAnimatable(
+            tag: widthTag,
+            curve: Curves.decelerate)
+        .addAnimatable(
             animatable: new Tween<double>(begin: 50.0, end: 300.0),
-            from:  const Duration(seconds: 0),
+            from: const Duration(seconds: 0),
             to: const Duration(milliseconds: 3000),
-            tag: "height",
-            curve: Curves.ease
-        ).addAnimatable(
+            tag: heightTag,
+            curve: Curves.ease)
+        .addAnimatable(
             animatable: new Tween<double>(begin: 300.0, end: 450.0),
-            from:  const Duration(milliseconds: 3000),
+            from: const Duration(milliseconds: 3000),
             to: const Duration(milliseconds: 3800),
-            tag: "height",
-            curve: Curves.decelerate
-         ).animate(controller);
-
-
+            tag: heightTag,
+            curve: Curves.decelerate)
+        .animate(controller);
   }
-
 
   Future<Null> _playAnimation() async {
     try {
@@ -86,9 +87,9 @@ class _SameVariableAnimationPageState extends State<SameVariableAnimationPage> w
           builder: (context, child) {
             return new Center(
               child: new Container(
-                color: sequenceAnimation["color"].value,
-                height: sequenceAnimation["height"].value,
-                width: sequenceAnimation["width"].value,
+                color: sequenceAnimation.get(colorTag).value,
+                height: sequenceAnimation.get(heightTag).value,
+                width: sequenceAnimation.get(widthTag).value,
               ),
             );
           },
@@ -97,5 +98,4 @@ class _SameVariableAnimationPageState extends State<SameVariableAnimationPage> w
       ),
     );
   }
-
 }

@@ -9,7 +9,7 @@ class SequencePage extends StatefulWidget {
 }
 
 class _SequencePageState extends State<SequencePage> with SingleTickerProviderStateMixin{
-
+  static final colorTag = SequenceAnimationTag<Color?>();
 
   late AnimationController controller;
   late SequenceAnimation sequenceAnimation;
@@ -25,19 +25,19 @@ class _SequencePageState extends State<SequencePage> with SingleTickerProviderSt
           animatable: new ColorTween(begin: Colors.red, end: Colors.yellow),
           from:  const Duration(seconds: 0),
           to: const Duration(seconds: 2),
-          tag: "color"
+          tag: colorTag
         ).addAnimatable(
           animatable: new ColorTween(begin: Colors.yellow, end: Colors.blueAccent),
           from:  const Duration(seconds: 2),
           to: const Duration(seconds: 4),
-          tag: "color",
+          tag: colorTag,
           curve: Curves.easeOut
         ).addAnimatable(
           animatable: new ColorTween(begin: Colors.blueAccent, end: Colors.pink),
           //  animatable: new Tween<double>(begin: 200.0, end: 40.0),
           from:  const Duration(seconds: 5),
           to: const Duration(seconds: 6),
-          tag: "color",
+          tag: colorTag,
           curve: Curves.fastOutSlowIn
         ).animate(controller);
 
@@ -75,7 +75,7 @@ class _SequencePageState extends State<SequencePage> with SingleTickerProviderSt
           builder: (context, child) {
             return new Center(
               child: new Container(
-                color: sequenceAnimation["color"].value,
+                color: sequenceAnimation.get(colorTag).value,
                 height: 200.0,
                 width: 200.0,
               ),

@@ -10,6 +10,13 @@ class StaggeredAnimationReplication extends StatefulWidget {
 
 class _StaggeredAnimationReplicationState extends State<StaggeredAnimationReplication> with SingleTickerProviderStateMixin{
 
+  static final opacityKey = SequenceAnimationTag<double>();
+  static final widthKey = SequenceAnimationTag<double>();
+  static final heightKey = SequenceAnimationTag<double>();
+  static final paddingKey = SequenceAnimationTag<EdgeInsets>();
+  static final borderRadiusKey = SequenceAnimationTag<BorderRadius>();
+  static final colorKey = SequenceAnimationTag<Color?>();
+
   late AnimationController controller;
   late SequenceAnimation sequenceAnimation;
 
@@ -24,37 +31,37 @@ class _StaggeredAnimationReplicationState extends State<StaggeredAnimationReplic
         from: Duration.zero,
         to: const Duration(milliseconds: 200),
         curve: Curves.ease,
-        tag: "opacity"
+        tag: opacityKey
     ).addAnimatable(
         animatable: new Tween<double>(begin: 50.0, end: 150.0),
         from: const Duration(milliseconds: 250),
         to: const Duration(milliseconds: 500),
         curve: Curves.ease,
-        tag: "width"
+        tag: widthKey
     ).addAnimatable(
         animatable: new Tween<double>(begin: 50.0, end: 150.0),
         from: const Duration(milliseconds: 500),
         to: const Duration(milliseconds: 750),
         curve: Curves.ease,
-        tag: "height"
+        tag: heightKey
     ).addAnimatable(
         animatable: new EdgeInsetsTween(begin: const EdgeInsets.only(bottom: 16.0), end: const EdgeInsets.only(bottom: 75.0),),
         from: const Duration(milliseconds: 500),
         to: const Duration(milliseconds: 750),
         curve: Curves.ease,
-        tag: "padding"
+        tag: paddingKey
     ).addAnimatable(
         animatable: new BorderRadiusTween(begin: new BorderRadius.circular(4.0), end: new BorderRadius.circular(75.0),),
         from: const Duration(milliseconds: 750),
         to: const Duration(milliseconds: 1000),
         curve: Curves.ease,
-        tag: "borderRadius"
+        tag: borderRadiusKey
     ).addAnimatable(
         animatable: new ColorTween(begin: Colors.indigo[100], end: Colors.orange[400],),
         from: const Duration(milliseconds: 1000),
         to: const Duration(milliseconds: 1500),
         curve: Curves.ease,
-        tag: "color"
+        tag: colorKey
     ).animate(controller);
   }
 
@@ -66,20 +73,20 @@ class _StaggeredAnimationReplicationState extends State<StaggeredAnimationReplic
 
   Widget _buildAnimation(BuildContext context, Widget? child) {
     return new Container(
-      padding: sequenceAnimation["padding"].value,
+      padding: sequenceAnimation.get(paddingKey).value,
       alignment: Alignment.bottomCenter,
       child: new Opacity(
-        opacity: sequenceAnimation["opacity"].value,
+        opacity: sequenceAnimation.get(opacityKey).value,
         child: new Container(
-          width: sequenceAnimation["width"].value,
-          height: sequenceAnimation["height"].value,
+          width: sequenceAnimation.get(widthKey).value,
+          height: sequenceAnimation.get(heightKey).value,
           decoration: new BoxDecoration(
-            color: sequenceAnimation["color"].value,
+            color: sequenceAnimation.get(colorKey).value,
             border: new Border.all(
               color: Colors.indigo[300]!,
               width: 3.0,
             ),
-            borderRadius: sequenceAnimation["borderRadius"].value,
+            borderRadius: sequenceAnimation.get(borderRadiusKey).value,
           ),
         ),
       ),
